@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    login
+{% endblock %}
+
+{% block main %}
+<script>
+function validateForm() {
+  let x = document.forms["login"]["username"].value;
+  let y = document.forms["login"]["password"].value;
+  if (x == "") {
+    alert("Username must be filled out");
+    return false;
+  }
+    if (y == "") {
+    alert("password must be filled out");
+    return false;
+  }
+}
+</script>
+<br>
+<form action="/login" method="post" name = login onsubmit=" return validateForm()">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" required >
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto w-auto " id="password" name="password" placeholder="Password" type="password" required>
+    </div>
+    <button class="btn btn-primary" type="submit"  >Log In</button>
+</form>
+<p>{{ success }}</p>
+{% endblock %}

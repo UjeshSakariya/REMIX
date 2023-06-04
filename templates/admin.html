@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    admin
+{% endblock %}
+
+{% block main %}
+{% if session.admin %}
+<br>
+<h3>Upload a post!</h3>
+<br>
+<h6 class = 'font'>Add photo:</h6>
+<br>
+<form action='/image' method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <br>
+    <h6 class = 'font'> Add Caption</h6>
+    <br>
+    <div class="mb-3">
+        <input type="text" class="form-control" name = 'caption' id = 'caption' >
+        <div  class="form-text">If you wish to caption your post, please enter a message</div>
+    </div>
+
+    <input type=submit value=Upload>
+  </form>
+
+
+{% else %}
+
+<form action="/admin" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="admin" name="admin" placeholder="admin passeord" type="password" required >
+    </div>
+    <button class="btn btn-primary" type="submit">submit</button>
+</form>
+
+{% endif %}
+
+<p>{{ success }}</p>
+{% endblock %}

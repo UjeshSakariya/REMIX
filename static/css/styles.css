@@ -1,0 +1,87 @@
+.center {
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 20em
+
+}
+
+.font {
+    color:red;
+    font-weight: bold;
+}
+
+#test {
+    color:red;
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: right;
+    text-align: center;
+  }
+  
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+  
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 150px;
+    margin-left: 535px;
+    font-size: 18px;
+  }
+  
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+
+  .about
+  {
+    font-weight: bold;
+    text-align: center;
+    
+  }
+
+.caption
+  {
+    text-align: left;
+    width:200px;
+  }
+
+.feed_caption {
+  text-align: left;
+  color: red;
+  font-weight: bold;
+
+
+  }
+    
+.user {
+  text-align: left;
+  font-weight: bold;
+  color: red;
+  font-size: 30px;
+
+}
+
+.comm {
+  margin-left: 0px;
+}
+

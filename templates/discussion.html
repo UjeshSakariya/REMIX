@@ -1,0 +1,119 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    discussion
+{% endblock %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block main %}
+
+
+<!-- to make sure a comment is entered-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        
+
+        let comments = document.querySelectorAll('.comm');
+
+        for( let i = 0; i < comments.length; i++ )
+                {
+                    comments[i].addEventListener("click", function(){
+                        let usersvalues = document.querySelectorAll('.comments4post');
+                        console.log(usersvalues)
+                        let user = usersvalues[i].value;
+                        console.log(user)
+                        if (user == "") {
+                            alert("You must add a comment");
+                            return false;
+                        }
+                        let postnum = i;
+                        document.getElementById("output").innerHTML = ('success');
+                        sendData(user,postnum)
+                    });
+                }
+
+        function sendData(user,postnum) {
+            let users = user
+            let postnums = postnum
+            const data = [users, postnum]
+
+            fetch('/process-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({data: data})
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log(result);
+                refreshDiv()
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        function refreshDiv()
+        {
+            $('#totalfeed').load(location.href + " #totalfeed");
+        }
+})
+</script>
+
+<h1> Here you can see what our team has been getting up to!</h1>
+<div id = 'totalfeed'>
+    {% for images in images %}
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <p class = 'user'>{{ user[loop.index0] }}</p>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <p><img src ="{{url_for('static',filename='feed/' + images)}}" width ='300' height = '300' alt=""></p>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        <p class = 'feed_caption'>{{ caption[loop.index0] }}</p>
+        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+        {% set count = loop.index0 %}
+
+        {% for comment in comments %}
+
+            {% if comment[0] == count %}
+
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <p>{{ comment[2] }}</p>
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <p class="small mb-0 ms-2">{{ comment[1] }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endif %}
+
+        {% endfor %}
+       
+
+        <div class="row d-flex justify-content-left">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                    <div class="card-body p-4">
+                        <div class="form-outline mb-4">
+                            <input type="text" id="comment" name = 'comment' class="form-control  comments4post" placeholder="Type comment..." />
+                            <br>
+                            <button class="btn btn-primary comm" type="'button" >Add comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+    <div id="output"></div>
+
+
+{% endblock %}
